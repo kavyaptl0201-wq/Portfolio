@@ -1,0 +1,164 @@
+@import './tokens.css';
+@import './glass.css';
+@import './photography.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0C0D12;
+  --bg-elevated: #14161D;
+  --surface: rgba(255, 255, 255, 0.04);
+  --surface-hover: rgba(255, 255, 255, 0.07);
+  --border: rgba(255, 255, 255, 0.09);
+  --text: #F5F5F7;
+  --text-muted: #9A9AA0;
+  --accent: #E8484F;
+  --accent-hover: #F25A60;
+}
+
+/* Site background: charcoal at the top fading to slate blue-grey at the bottom */
+.site-bg {
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 88%, rgba(98, 110, 140, 0.45), transparent 70%),
+    linear-gradient(180deg, #05060B 0%, #10121A 30%, #262C3B 65%, #353D50 100%);
+}
+
+/* Hero name: variable letters in fixed-width slots; each slot stacks the letter over two echo copies */
+.hero-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Roboto Flex Variable", sans-serif;
+  font-size: min(46vh, 34vw);
+  line-height: 0.8;
+}
+
+.hero-name-slot {
+  width: 0.48em;
+  display: grid;
+  place-items: center;
+}
+
+.hero-name-letter {
+  grid-area: 1 / 1;
+  color: #F5F5F7;
+  font-variation-settings: "wght" 100, "wdth" 25;
+  transform: scaleX(0.42);
+  text-shadow: 0 0 28px rgba(255, 255, 255, 0.18);
+}
+
+.hero-name-echo {
+  color: #C9CDD6;
+  text-shadow: none;
+}
+
+/* Loader counter: wide, heavy digits */
+.hero-counter {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-size: min(14vh, 9vw);
+  line-height: 1;
+  color: #FFFFFF;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Chrome Metal Text Fill for Hero Letters */
+.metallic-text-gradient {
+  background: linear-gradient(180deg, #FFFFFF 0%, #8A8F99 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+/* Accessibility: Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Ambient Background GPU-Accelerated Animations (Transform Only) */
+@keyframes ambientDrift1 {
+  0% { transform: translate(-50%, 0) scale(1); }
+  50% { transform: translate(-46%, 7%) scale(1.1); }
+  100% { transform: translate(-54%, -5%) scale(0.95); }
+}
+
+@keyframes ambientDrift2 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-7%, -8%) scale(1.12); }
+  100% { transform: translate(6%, 6%) scale(0.94); }
+}
+
+@keyframes ambientDrift3 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(7%, -6%) scale(1.08); }
+  100% { transform: translate(-5%, 5%) scale(0.95); }
+}
+
+@keyframes dustFloat {
+  0% { transform: translateY(105dvh); opacity: 0; }
+  15% { opacity: var(--dust-op, 0.15); }
+  85% { opacity: var(--dust-op, 0.15); }
+  100% { transform: translateY(-5dvh); opacity: 0; }
+}
+
+.ambient-spotlight-1 {
+  animation: ambientDrift1 38s ease-in-out infinite alternate;
+  will-change: transform;
+}
+.ambient-spotlight-2 {
+  animation: ambientDrift2 44s ease-in-out infinite alternate;
+  will-change: transform;
+}
+.ambient-spotlight-3 {
+  animation: ambientDrift3 50s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.tab-hidden *,
+.anim-paused {
+  animation-play-state: paused !important;
+}
+
+/* 60s Tech Marquee Animation */
+@keyframes techMarquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: techMarquee 60s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee:hover,
+.group-marquee:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* Responsive No-Scrollbar Utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Accessible Touch Targets (>= 44px height on touch devices) */
+@media (pointer: coarse), (max-width: 768px) {
+  button,
+  [role="button"],
+  .apple-button-primary,
+  .apple-button-secondary,
+  .nav-resume-btn {
+    min-height: 44px;
+  }
+}

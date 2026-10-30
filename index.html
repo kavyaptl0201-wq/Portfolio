@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Kavya - Portfolio</title>
+    <meta name="description" content="Portfolio of Kavya." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Kavya - Portfolio" />
+    <meta property="og:description" content="Portfolio of Kavya." />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Kavya - Portfolio" />
+    <meta name="twitter:description" content="Portfolio of Kavya." />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#0B0C11" />
+  </head>
+  <body>
+    <!-- Critical inline CSS for instant zero-delay first paint -->
+    <style>
+      html, body {
+        background-color: #05060B;
+        margin: 0;
+        padding: 0;
+      }
+      #initial-intro-vignette {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(180deg, #05060B 0%, #10121A 30%, #262C3B 65%, #353D50 100%);
+        pointer-events: none;
+        z-index: 10;
+      }
+    </style>
+
+    <!-- Accessible Skip Link -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-6 focus:py-3 focus:bg-white focus:text-black focus:rounded-pill focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-white">
+      Skip to main content
+    </a>
+    
+    <!-- Background cover shown until the intro loader takes over -->
+    <div id="initial-intro-vignette" aria-hidden="true"></div>
+    <script>
+      // The intro loader only belongs to the home page
+      if (location.pathname !== '/') {
+        document.getElementById('initial-intro-vignette').remove();
+      }
+    </script>
+
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
